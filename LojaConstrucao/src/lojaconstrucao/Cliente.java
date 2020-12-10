@@ -5,10 +5,30 @@
  */
 package lojaconstrucao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author alchemist
  */
 public class Cliente extends Pessoa {
+    private List<Venda> regCompras;
     
+    public Cliente() {
+        regCompras = new ArrayList<Venda>();
+    }
+    
+    public void adicionaVenda(Venda v) {
+        
+    }
+    
+    public void imprimirInfo() {
+        System.out.println(this);
+    }
+    
+    /*@Override
+    public String toString() {
+        
+    }*/
 }

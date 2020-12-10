@@ -15,7 +15,12 @@ public class LojaConstrucao {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Sistema sistema;
+        sistema = new Sistema();
+        
+        Colaborador usuario;
+        
+        // TODO: Menu de login e de operações
     }
     
 }

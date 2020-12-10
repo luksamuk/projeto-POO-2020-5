@@ -10,5 +10,6 @@ package lojaconstrucao;
  * @author alchemist
  */
 public class Colaborador extends Pessoa {
-    
+    protected String login;
+    protected String senha;
 }
