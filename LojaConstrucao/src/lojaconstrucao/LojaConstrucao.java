@@ -16,7 +16,7 @@ public class LojaConstrucao {
      */
     public static void main(String[] args) {
         Sistema sistema;
-        sistema = new Sistema();
+        sistema = Sistema.getInstance();
         
         Colaborador usuario;
         

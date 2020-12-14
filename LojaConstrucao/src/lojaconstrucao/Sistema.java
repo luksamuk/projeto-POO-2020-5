@@ -14,12 +14,14 @@ import java.util.HashMap;
  */
 public class Sistema {
     
+    private static Sistema instance;
+    
     private Map<String, Colaborador> colaboradores;
     private Map<Integer, Venda>      vendas;
     private Map<Integer, Cliente>    clientes;
     private Map<Integer, Material>   materiais;
     
-    public Sistema() {
+    private Sistema() {
         // Polimorfismo: o campo é declarado através da
         // interface Map, mas a instância é de um HashMap.
         
@@ -30,6 +32,13 @@ public class Sistema {
         materiais     = new HashMap<Integer, Material>();
         
         // TODO: Cadastrar administrador
+    }
+    
+    public static Sistema getInstance() {
+        if(instance == null) {
+            instance = new Sistema();
+        }
+        return instance;
     }
     
     public void incluirColaborador(Administrador adm, Colaborador c) throws InvalidPessoaException {
