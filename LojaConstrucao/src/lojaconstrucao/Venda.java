@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Venda.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
@@ -11,9 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Map;
 
-/**
- *
- * @author alchemist
+/** Representa uma venda realizada no Sistema de Loja de Construção.
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
 public class Venda {
     private int idVenda;
@@ -26,8 +27,8 @@ public class Venda {
         idVenda = id;
         data = new Date();
         valorTotal = 0.0f;
-        materiais = new HashSet<Material>();
-        quantidades = new HashMap<Material, Integer>();
+        materiais = new HashSet<>();
+        quantidades = new HashMap<>();
     }
 
     public int getIdVenda() {

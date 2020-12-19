@@ -1,26 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* LojaConstrucao.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
-/**
+/** Ponto de entrada de execução da aplicação.
  *
- * @author luisa
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
-public class LojaConstrucao {
+public final class LojaConstrucao {
 
-    /**
-     * @param args the command line arguments
+    /** Método estático chamado no início da execução do programa.
+     * @param args Argumentos fornecidos via linha de comando.
      */
     public static void main(String[] args) {
         Sistema sistema;
         sistema = Sistema.getInstance();
         
         Colaborador usuario;
-        
-        // TODO: Menu de login e de operações
     }
     
 }

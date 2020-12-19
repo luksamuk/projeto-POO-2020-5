@@ -1,19 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Sistema.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
 import java.util.Map;
 import java.util.HashMap;
 
-/**
- *
- * @author alchemist
+/** Representa...
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
-public class Sistema {
-    
+public final class Sistema {
     private static Sistema instance;
     
     private Map<String, Colaborador> colaboradores;
@@ -26,10 +26,10 @@ public class Sistema {
         // interface Map, mas a instância é de um HashMap.
         
         // Colaboradores são indexados pelo CPF, que é String
-        colaboradores = new HashMap<String, Colaborador>();
-        vendas        = new HashMap<Integer, Venda>();
-        clientes      = new HashMap<Integer, Cliente>();
-        materiais     = new HashMap<Integer, Material>();
+        colaboradores = new HashMap<>();
+        vendas        = new HashMap<>();
+        clientes      = new HashMap<>();
+        materiais     = new HashMap<>();
         
         // TODO: Cadastrar administrador
     }
@@ -41,11 +41,13 @@ public class Sistema {
         return instance;
     }
     
-    public void incluirColaborador(Administrador adm, Colaborador c) throws InvalidPessoaException {
+    public void incluirColaborador(Administrador adm, Colaborador c)
+            throws InvalidPessoaException {
         
     }
     
-    public void incluirCliente(Administrador adm, Cliente c) throws InvalidPessoaException {
+    public void incluirCliente(Administrador adm, Cliente c)
+            throws InvalidPessoaException {
         
     }
     

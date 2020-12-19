@@ -1,22 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Cliente.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author alchemist
+/** Representa um Cliente no Sistema de Loja de Materiais.
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
-public class Cliente extends Pessoa {
+public final class Cliente extends Pessoa {
     private List<Venda> regCompras;
     
-    public Cliente() {
-        regCompras = new ArrayList<Venda>();
+    public Cliente(String nome, String endereco, String email, String cpf,
+            String telefone) {
+        super(nome, endereco, email, cpf, telefone);
+        regCompras = new ArrayList<>();
     }
     
     public void adicionaVenda(Venda v) {

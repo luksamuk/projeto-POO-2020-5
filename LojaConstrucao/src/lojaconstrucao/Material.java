@@ -1,17 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Material.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
 import java.util.Date;
 
-/**
- *
- * @author alchemist
+/** Representa um material armazenado no estoque do Sistema de Loja de
+ * Construção.
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
-public class Material {
+public final class Material {
     private String nome;
     private int quantidade;
     private float preco;
@@ -19,6 +21,18 @@ public class Material {
     private float margemLucro;
     private Date dataFabricacao;
     private String fornecedor;
+    
+    public Material(String nome, int quantidade, float preco,
+            String especificacao, float margemLucro, Date dataFabricacao,
+            String fornecedor) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.preco = preco;
+        this.especificacao = especificacao;
+        this.margemLucro = margemLucro;
+        this.dataFabricacao = dataFabricacao;
+        this.fornecedor = fornecedor;
+    }
 
     public String getNome() {
         return nome;

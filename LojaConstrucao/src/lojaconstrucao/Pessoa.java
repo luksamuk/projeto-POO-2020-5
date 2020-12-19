@@ -1,13 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Pessoa.java
+ * Este arquivo faz parte do projeto "Loja de Construção".
+ * Este código é distribuído sob a Licença MIT.
  */
 package lojaconstrucao;
 
-/**
- *
- * @author alchemist
+/** Provê um guia de implementação de classes que envolvam informações de
+ * indivíduos.
+ * @author Gabrielly Bailon Soares de Souza
+ * @author Lucas Samuel Vieira
+ * @author Luísa Vitória Guimarães Silva
+ * @version 1.0
  */
 public abstract class Pessoa {
     protected String nome;
@@ -15,6 +17,15 @@ public abstract class Pessoa {
     protected String email;
     protected String cpf;
     protected String telefone;
+    
+    public Pessoa(String nome, String endereco, String email, String cpf,
+            String telefone) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.email = email;
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
 
     public String getNome() {
         return nome;
@@ -28,7 +39,7 @@ public abstract class Pessoa {
         return email;
     }
 
-    public String getCpf() {
+    public String getCPF() {
         return cpf;
     }
 
