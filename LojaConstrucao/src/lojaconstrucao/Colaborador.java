@@ -15,6 +15,8 @@ import java.util.List;
  * @version 1.0
  */
 public class Colaborador extends Pessoa {
+    protected static int num_instances = 0;
+    
     protected String login;
     protected String senha;
     
@@ -23,6 +25,7 @@ public class Colaborador extends Pessoa {
         super(nome, endereco, email, cpf, telefone);
         this.login = login;
         this.senha = senha;
+        num_instances++;
     }
 
     public String getLogin() {
@@ -39,6 +42,10 @@ public class Colaborador extends Pessoa {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public static int getNumInstances() {
+        return num_instances;
     }
     
     /**

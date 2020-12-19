@@ -106,4 +106,12 @@ public final class Sistema {
     public boolean consultarVendas() {
         return false;
     }
+    
+    public int getInstanciasClientes() {
+        return Cliente.getNumInstances();
+    }
+    
+    public int getInstanciasColaboradores() {
+        return Colaborador.getNumInstances();
+    }
 }
