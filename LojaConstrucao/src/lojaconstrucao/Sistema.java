@@ -25,7 +25,8 @@ public final class Sistema {
         // Polimorfismo: o campo é declarado através da
         // interface Map, mas a instância é de um HashMap.
         
-        // Colaboradores são indexados pelo CPF, que é String
+        // Colaboradores são indexados pelo Login, que é String.
+        // Clientes são indexados pelo CPF, que é String.
         colaboradores = new HashMap<>();
         vendas        = new HashMap<>();
         clientes      = new HashMap<>();

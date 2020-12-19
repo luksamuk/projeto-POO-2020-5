@@ -17,4 +17,9 @@ public final class Administrador extends Colaborador {
             String telefone, String login, String senha) {
         super(nome, endereco, email, cpf, telefone, login, senha);
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "\nEste colaborador é um administrador.";
+    }
 }

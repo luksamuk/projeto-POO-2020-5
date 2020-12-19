@@ -76,4 +76,9 @@ public class Colaborador extends Pessoa {
         // TODO
         return l;
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "\nLogin:    " + this.login;
+    }
 }

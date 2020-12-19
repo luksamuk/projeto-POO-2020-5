@@ -47,4 +47,12 @@ public abstract class Pessoa {
         return telefone;
     }
     
+    @Override
+    public String toString() {
+        return "Nome:       " + this.nome
+             + "\nEndereço: " + this.endereco
+             + "\nE-mail:   " + this.email
+             + "\nCPF:      " + this.cpf
+             + "\nTelefone: " + this.telefone;
+    }
 }
