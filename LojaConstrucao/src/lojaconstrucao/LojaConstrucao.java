@@ -107,12 +107,21 @@ public final class LojaConstrucao {
         } while(executando);
     }
     
-    public static void realizaVendas(Colaborador c) {
+    /* ===== VENDAS ===== */
+    
+    private static void realizaVendas(Colaborador c) {
         // TODO: Imprimir extrato logo após realização da venda!
         System.out.println("Realização de vendas não implementada!\n");
     }
     
-    public static void crudMateriais(Colaborador c) {
+    
+    /* ===== MATERIAIS ===== */
+    
+    private static void cadastroMaterial(Administrador adm) {
+        
+    }    
+    
+    private static void crudMateriais(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
@@ -175,7 +184,72 @@ public final class LojaConstrucao {
         }
     }
     
-    public static void crudClientes(Colaborador c) {
+    /* ===== CLIENTES ===== */
+    
+    private static void cadastroCliente(Administrador adm) {
+        String nome, endereco, email, cpf, telefone;
+        
+        System.out.print("Nome:     ");
+        nome = scanner.nextLine().trim();
+        System.out.print("Endereço: ");
+        endereco = scanner.nextLine().trim();
+        System.out.print("E-mail:   ");
+        email = scanner.nextLine().trim();
+        System.out.print("CPF:      ");
+        cpf = scanner.nextLine().trim();
+        System.out.print("Telefone: ");
+        telefone = scanner.nextLine().trim();
+
+        try {
+            var cl = new Cliente(nome, endereco, email, cpf,
+                    telefone);
+            
+            sistema.incluirCliente(adm, cl);
+            
+            System.out.println("\nCadastro realizado com sucesso.");
+            System.out.println("Dados cadastrados:\n" + cl);
+        } catch(InvalidPessoaException e) {
+            System.err.println("Erro ao cadastrar cliente: " + e);
+        }
+    }
+    
+    private static void removeCliente(Administrador adm) {
+        String cpf;
+        System.out.print("CPF:      ");
+        cpf = scanner.nextLine().trim();
+        
+        if(sistema.removeCliente(adm, cpf)) {
+            System.out.println("\nCliente removido com sucesso.");
+        } else {
+            System.err.println("Erro ao remover cliente: CPF não cadastrado.");
+        }
+    }
+    
+    private static void alteraCliente(Administrador adm) {
+        System.out.println("Insira o CPF para pesquisa.");
+        System.out.print("CPF:      ");
+        var cpf = scanner.nextLine().trim();
+        Cliente c = sistema.getCliente(cpf);
+        if(c != null) {
+            System.out.println("Insira as novas informações do cliente.");
+            System.out.print("Nome:     ");
+            c.setNome(scanner.nextLine().trim());
+            System.out.print("Endereço: ");
+            c.setEndereco(scanner.nextLine().trim());
+            System.out.print("E-mail:   ");
+            c.setEmail(scanner.nextLine().trim());
+            System.out.print("CPF:      ");
+            c.setCPF(scanner.nextLine().trim());
+            System.out.print("Telefone: ");
+            c.setTelefone(scanner.nextLine().trim());
+            
+            System.out.println("Dados modificados com sucesso.\n");
+        } else {
+            System.err.println("Erro ao atualizar dados: Cliente não encontrado.");
+        }
+    }
+    
+    private static void crudClientes(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
@@ -204,27 +278,35 @@ public final class LojaConstrucao {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Cadastro não implementado");
+                    cadastroCliente((Administrador)c);
                     break;
                 case 2:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Atualização de dados não implementada");
+                    alteraCliente((Administrador)c);
                     break;
                 case 3:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Remoção não implementada");
+                    removeCliente((Administrador)c);
                     break;
                 case 4:
-                    System.err.println("Mostrar dados não implementada");
+                    String cpf;
+                    System.out.print("CPF:      ");
+                    cpf = scanner.nextLine().trim();
+                    Cliente cl = sistema.getCliente(cpf);
+                    if(cl != null) {
+                        System.out.println(cl);
+                    } else {
+                        System.err.println("Cliente não encontrado.");
+                    }
                     break;
                 case 5:
-                    System.err.println("Mostrar lista não implementada");
+                    sistema.mostraClientes();
                     break;
                 case 6: return;
                 case 7:
@@ -238,7 +320,76 @@ public final class LojaConstrucao {
         }
     }
     
-    public static void crudColaboradores(Colaborador c) {
+    /* ===== COLABORADOR ===== */
+    
+    private static void cadastroColaborador(Administrador adm) {
+        String nome, endereco, email, cpf, telefone, login, senha;
+        
+        System.out.print("Login:    ");
+        login = scanner.nextLine().trim();
+        System.out.print("Senha:    ");
+        senha = scanner.nextLine().trim();
+        System.out.print("Nome:     ");
+        nome = scanner.nextLine().trim();
+        System.out.print("Endereço: ");
+        endereco = scanner.nextLine().trim();
+        System.out.print("E-mail:   ");
+        email = scanner.nextLine().trim();
+        System.out.print("CPF:      ");
+        cpf = scanner.nextLine().trim();
+        System.out.print("Telefone: ");
+        telefone = scanner.nextLine().trim();
+        
+        try {
+            var col = new Colaborador(nome, endereco, email, cpf,
+                    telefone, login, senha);
+            
+            sistema.incluirColaborador(adm, col);
+            
+            System.out.println("\nCadastro realizado com sucesso.");
+            System.out.println("Dados cadastrados:\n" + col);
+        } catch(InvalidPessoaException e) {
+            System.err.println("Erro ao cadastrar colaborador: " + e);
+        }
+    }
+    
+    private static void removeColaborador(Administrador adm) {
+        System.out.print("Login:    ");
+        var login = scanner.nextLine().trim();
+        if(sistema.removeColaborador(adm, login)) {
+            System.out.println("\nRemoção realizada com sucesso.");
+        } else {
+            System.err.println("Erro ao remover colaborador: Login não cadastrado.");
+        }
+    }
+    
+    private static void alteraColaborador(Administrador adm) {
+        System.out.println("Insira o login para pesquisa.");
+        System.out.print("Login:    ");
+        var login = scanner.nextLine().trim();
+        Colaborador c = sistema.getColaborador(login);
+        if(c != null) {
+            System.out.println("Insira as novas informações do colaborador.");
+            System.out.print("Senha:    ");
+            c.setSenha(scanner.nextLine().trim());
+            System.out.print("Nome:     ");
+            c.setNome(scanner.nextLine().trim());
+            System.out.print("Endereço: ");
+            c.setEndereco(scanner.nextLine().trim());
+            System.out.print("E-mail:   ");
+            c.setEmail(scanner.nextLine().trim());
+            System.out.print("CPF:      ");
+            c.setCPF(scanner.nextLine().trim());
+            System.out.print("Telefone: ");
+            c.setTelefone(scanner.nextLine().trim());
+            
+            System.out.println("Dados modificados com sucesso.\n");
+        } else {
+            System.err.println("Erro ao atualizar dados: Colaborador não encontrado.");
+        }
+    }
+    
+    private static void crudColaboradores(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
@@ -265,21 +416,21 @@ public final class LojaConstrucao {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Cadastro não implementado");
+                    cadastroColaborador((Administrador)c);
                     break;
                 case 2:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Atualização de dados não implementada");
+                    alteraColaborador((Administrador)c);
                     break;
                 case 3:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Remoção não implementada");
+                    removeColaborador((Administrador)c);
                     break;
                 case 4: return;
                 case 5:

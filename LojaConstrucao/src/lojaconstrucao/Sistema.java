@@ -87,12 +87,45 @@ public final class Sistema {
         colaboradores.put(c.getLogin(), c);
     }
     
+    public boolean removeColaborador(Administrador adm, String login) {
+        Colaborador c = colaboradores.get(login);
+        if(c == null) {
+            return false;
+        }
+        colaboradores.remove(login);
+        return true;
+    }
+    
+    public Colaborador getColaborador(String login) {
+        return colaboradores.get(login);
+    }
+    
     public void incluirCliente(Administrador adm, Cliente c)
             throws InvalidPessoaException {
         if(clientes.get(c.getCPF()) != null) {
             throw new InvalidPessoaException(c);
         }
         clientes.put(c.getCPF(), c);
+    }
+    
+    public boolean removeCliente(Administrador adm, String cpf) {
+        Cliente c = getCliente(cpf);
+        if(c == null) {
+            return false;
+        }
+        clientes.remove(cpf);
+        return true;
+    }
+    
+    public Cliente getCliente(String cpf) {
+        return clientes.get(cpf);
+    }
+    
+    public void mostraClientes() {
+        for(Cliente c : clientes.values()) {
+            System.out.println(c);
+            System.out.println();
+        }
     }
     
     public boolean realizarVenda(Venda v) {

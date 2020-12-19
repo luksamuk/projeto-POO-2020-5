@@ -55,7 +55,7 @@ public class Colaborador extends Pessoa {
      * @return Lista de colaboradores distintos que podem ser inseridos.
      */
     public static List<Colaborador> geraColaboradores() {
-        List<Colaborador> l = new ArrayList<Colaborador>();
+        List<Colaborador> l = new ArrayList<>();
         
         l.add(new Colaborador("Fulano da Silva",    "Rua dos Bobos, 0, Centro",
                               "fulano@exemplo.com", "12345678910",
