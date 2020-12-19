@@ -48,7 +48,9 @@ public final class Sistema {
             try {
                 this.incluirColaborador(adm, c);
             } catch(InvalidPessoaException e) {
-                System.out.println(e);
+                System.out.println(
+                        "No cadastro de colaboradores estáticos: "
+                        + e);
             }
         }
     }
@@ -58,6 +60,19 @@ public final class Sistema {
             instance = new Sistema();
         }
         return instance;
+    }
+    
+    public Colaborador realizaLogin(String login, String senha)
+        throws InvalidLoginException {
+        Colaborador c = colaboradores.get(login);
+        if(c == null) {
+            throw new InvalidLoginException(
+                    "Login " + login + "não cadastrado");
+        }
+        if(c.getSenha().equals(senha)) {
+            return c;
+        }
+        throw new InvalidLoginException(login + ": Senha incorreta");
     }
     
     public void incluirColaborador(Administrador adm, Colaborador c)

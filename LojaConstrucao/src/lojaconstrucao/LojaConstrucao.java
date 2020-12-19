@@ -21,6 +21,12 @@ public final class LojaConstrucao {
         sistema = Sistema.getInstance();
         
         Colaborador usuario;
+        
+        try {
+            usuario = sistema.realizaLogin("admin", "admin");
+        } catch (InvalidLoginException e) {
+            System.out.println("Erro ao realizar login: " + e);
+        }
     }
     
 }
