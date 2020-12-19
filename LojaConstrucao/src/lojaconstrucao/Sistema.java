@@ -18,7 +18,7 @@ public final class Sistema {
     
     private Map<String, Colaborador> colaboradores;
     private Map<Integer, Venda>      vendas;
-    private Map<Integer, Cliente>    clientes;
+    private Map<String, Cliente>     clientes;
     private Map<Integer, Material>   materiais;
     
     private Sistema() {
@@ -85,7 +85,10 @@ public final class Sistema {
     
     public void incluirCliente(Administrador adm, Cliente c)
             throws InvalidPessoaException {
-        
+        if(clientes.get(c.getCPF()) != null) {
+            throw new InvalidPessoaException(c);
+        }
+        clientes.put(c.getCPF(), c);
     }
     
     public boolean realizarVenda(Venda v) {
