@@ -89,4 +89,15 @@ public final class Material {
     public void setFornecedor(String fornecedor) {
         this.fornecedor = fornecedor;
     }
+    
+    @Override
+    public String toString() {
+        return  "Nome do material:       " + this.nome
+             + "\nFornecedor:            " + this.fornecedor
+             + "\nQuantidade em estoque: " + this.quantidade
+             + "\nPreço unitário:        " + this.preco
+             + "\nMargem de Lucro:       " + this.margemLucro
+             + "\nData de Fabricação:    " + this.dataFabricacao
+             + "\nEspecificação:         " + this.especificacao;
+    }
 }

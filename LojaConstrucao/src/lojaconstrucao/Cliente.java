@@ -41,8 +41,5 @@ public final class Cliente extends Pessoa {
         num_instances = num;
     }
     
-    /*@Override
-    public String toString() {
-        
-    }*/
+    // Cliente já herda toString de Pessoa.
 }

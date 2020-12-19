@@ -51,8 +51,22 @@ public class Venda {
         return quantidades;
     }
     
+    @Override
+    public String toString() {
+        String buffer = new String();
+        buffer += "Venda #" + this.idVenda + "\n";
+        buffer += "Data:        " + this.data + "\n";
+        buffer += "Valor Total: " + this.valorTotal + "\n";
+        buffer += "Materiais adquiridos:";
+        for(Material m : materiais) {
+            buffer += "\nNome do material: " + m.getNome();
+            buffer += "Quantidade:       " + quantidades.get(m);
+        }
+        return buffer;
+    }
+    
     public String gerarExtrato() {
-        return "";
+        return this.toString();
     }
     
     public void insereMaterial(Material m, int quantidade) {

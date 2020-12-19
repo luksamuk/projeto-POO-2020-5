@@ -14,4 +14,6 @@ public class InvalidPessoaException extends Exception {
     public InvalidPessoaException(Pessoa p) {
         super("Cadastro inválido para Pessoa " + p.getNome());
     }
+    
+    // Exceções já herdam toString de Exception.
 }

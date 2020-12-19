@@ -14,4 +14,6 @@ public class InvalidLoginException extends Exception {
     public InvalidLoginException(String info) {
         super("Impossível realizar login: " + info);
     }
+    
+    // Exceções já herdam toString de Exception.
 }

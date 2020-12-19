@@ -7,7 +7,10 @@ package lojaconstrucao;
 import java.util.Map;
 import java.util.HashMap;
 
-/** Representa...
+/** Representa o Sistema de gerenciamento de Loja de Materiais.
+ * Este sistema deve ser instanciado uma única vez pela aplicação. Portanto,
+ * utiliza-se o padrão de projetos Singleton para garantir que os dados da
+ * aplicação existam uma única vez e que a mesma não sofra inconsistências.
  * @author Gabrielly Bailon Soares de Souza
  * @author Lucas Samuel Vieira
  * @author Luísa Vitória Guimarães Silva
@@ -114,5 +117,10 @@ public final class Sistema {
     
     public int getInstanciasColaboradores() {
         return Colaborador.getNumInstances();
+    }
+    
+    @Override
+    public String toString() {
+        return "Singleton do Sistema Loja Materiais";
     }
 }
