@@ -31,7 +31,26 @@ public final class Sistema {
         clientes      = new HashMap<>();
         materiais     = new HashMap<>();
         
-        // TODO: Cadastrar administrador
+        // Cadastra administrador padrão do sistema
+        Administrador adm =
+                new Administrador(
+                        "Administrador",
+                        "",
+                        "admin@loja.com",
+                        "00000000000",
+                        "038000000000",
+                        "admin",
+                        "admin");
+        colaboradores.put(adm.getLogin(), adm);
+        
+        // Cadastra colaboradores estáticos do sistema
+        for(Colaborador c : Colaborador.geraColaboradores()) {
+            try {
+                this.incluirColaborador(adm, c);
+            } catch(InvalidPessoaException e) {
+                System.out.println(e);
+            }
+        }
     }
     
     public static Sistema getInstance() {
@@ -43,7 +62,10 @@ public final class Sistema {
     
     public void incluirColaborador(Administrador adm, Colaborador c)
             throws InvalidPessoaException {
-        
+        if(colaboradores.get(c.getLogin()) != null) {
+            throw new InvalidPessoaException(c);
+        }
+        colaboradores.put(c.getLogin(), c);
     }
     
     public void incluirCliente(Administrador adm, Cliente c)

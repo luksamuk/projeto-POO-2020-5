@@ -11,7 +11,7 @@ package lojaconstrucao;
  * @version 1.0
  */
 public class InvalidPessoaException extends Exception {
-    public InvalidPessoaException() {
-        super("Cadastro inválido para Pessoa");
+    public InvalidPessoaException(Pessoa p) {
+        super("Cadastro inválido para Pessoa " + p.getNome());
     }
 }
