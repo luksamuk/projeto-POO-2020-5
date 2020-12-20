@@ -12,7 +12,7 @@ package lojaconstrucao;
  * @author Luísa Vitória Guimarães Silva
  * @version 1.0
  */
-public abstract class Pessoa {
+public abstract class Pessoa implements Comparable<Pessoa> {
 
     /**
      * Nome da pessoa.
@@ -150,5 +150,16 @@ public abstract class Pessoa {
              + "\nE-mail:   " + this.email
              + "\nCPF:      " + this.cpf
              + "\nTelefone: " + this.telefone;
+    }
+    
+    /**
+     * Compara duas pessoas através do nome das mesmas, em ordem alfabética.
+     * @param p Pessoa ao qual se quer comparar.
+     * @return Número inteiro representando a comparação de acordo com ordem
+     * alfabética.
+     */
+    @Override
+    public int compareTo(Pessoa p) {
+        return p.getNome().compareTo(this.nome);
     }
 }
