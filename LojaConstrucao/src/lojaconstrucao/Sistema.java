@@ -157,6 +157,16 @@ public final class Sistema implements Serializable {
     }
     
     /**
+     * Imprime a lista completa de colaboradores na saída padrão do console.
+     */
+    public void mostraColaboradores() {
+        for(Colaborador c : colaboradores.values()) {
+            System.out.println(c);
+            System.out.println();
+        }
+    }
+    
+    /**
      * Adiciona um novo cliente no sistema.
      * @param adm Referência ao administrador que está realizando a operação.
      * @param c Cliente aguardando cadastro, populado com suas informações

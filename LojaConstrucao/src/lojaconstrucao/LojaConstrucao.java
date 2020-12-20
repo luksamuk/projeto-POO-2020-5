@@ -63,7 +63,7 @@ public final class LojaConstrucao {
             scanner.nextLine();
             System.out.println();
 
-            if((option > 1) && (option < 9) && (usuario == null)) {
+            if((option > 1) && (option < 6) && (usuario == null)) {
                 System.out.println("Realize login primeiro.");
             } else {
                 switch(option) {
@@ -336,8 +336,9 @@ public final class LojaConstrucao {
                     "1. Cadastrar colaborador (administrador)\n"
                   + "2. Atualizar dados de colaborador (administrador)\n"
                   + "3. Remover colaborador (administrador)\n"
-                  + "4. Voltar\n"
-                  + "5. Sair\n"
+                  + "4. Mostrar lista de colaboradores\n"
+                  + "5. Voltar\n"
+                  + "6. Sair\n"
             );
             
             System.out.print("Sua opção: ");
@@ -367,8 +368,11 @@ public final class LojaConstrucao {
                     }
                     removeColaborador((Administrador)c);
                     break;
-                case 4: return;
-                case 5:
+                case 4:
+                    sistema.mostraColaboradores();
+                    break;
+                case 5: return;
+                case 6:
                     executando = false;
                     return;
                 default:

@@ -113,13 +113,97 @@ public class Colaborador extends Pessoa {
                               "beltrano@exemplo.com", "99911188823",
                               "038977776666", "beltrano", "dolphins"));
         
-        // Colaborador que dará erro
+        // Colaborador que dará erro: login repetido.
         l.add(new Colaborador("Rásquer da Silva", "Rua dos Rásquers, 0, Centro",
                               "rasquer@l33t.com", "12345678910",
                               "038999998888", "fulano", "s0uumr4squerb4c4n4"));
         
-        // Adicionar mais 22...
-        // TODO
+        l.add(new Colaborador("Maria da Paz",
+                "Rua de Mais um Teste, 541, Rio Grande, Diamantina",
+                "mariamaria@exemplo.com", "55655655857", "038999995231",
+                "maria", "senhadamaria"));
+        l.add(new Colaborador("Mari Mar",
+                "Rua de testando mais uma vez, 547, Largo, Diamantina",
+                "marimar@exemplo.com", "11102325403", "03888887455",
+                "marimar", "marimartemumasenha"));
+        l.add(new Colaborador("José Wilson",
+                "Rua Com Um Nome, 854, Rio Grande, Diamantina",
+                "jose@exemplo.com", "22210322230", "038975412589",
+                "jose", "jose123"));
+        l.add(new Colaborador("José da Silva",
+                "Rua das Pedras, 12, Centro, Diamantina",
+                "josedasilva1@gmail.com", "12312111122", "03193559352",
+                "josedasilva", "senhaa"));
+        l.add(new Colaborador("Maria Ana",
+                "Rua das Ondas, 22, Centro, Diamantina", "mariaana@gmail.com",
+                "12312551122", "03193559352", "mariaana", "senha123"));
+        l.add(new Colaborador("Floribela Santos",
+                "Rua das Flores, 35, Largo Dom João, Diamantina",
+                "floribelasantos35@gmail.com", "12312122122", "03193573852",
+                "floribelasantos", "123floribela"));
+        l.add(new Colaborador("Cláudio Pereira",
+                "Avenida 1, 55, Palha, Diamantina",
+                "claudiopereira123@gmail.com", "19873489122", "03192332314",
+                "claudiopereira", "senhaclaudio"));
+        l.add(new Colaborador("Ana Maria",
+                "Rua do cansaço, 123, Rio Grande, Diamantina",
+                "anamaria@exemplo.com", "85691458298", "038912345678",
+                "anamaria", "senhadaanamaria"));
+        l.add(new Colaborador("Lucia Antônia Pinheiro",
+                "Avenida 2, 88, Polivalente, Diamantina",
+                "luciaantoniap1233@gmail.com", "19873231122", "03192332314",
+                "luciaantoniap", "luciasenhaantoniap"));
+        l.add(new Colaborador("Josicraudo Fernando",
+                "Rua teste, 35, Largo Dom João, Diamantina",
+                "josicraud@exemplo.com", "99999999999", "038999854762",
+                "josicraudo", "senhajosi"));
+        l.add(new Colaborador("Ricardo Gomes",
+                "Rua das Flores, 42, Largo Dom João, Diamantina",
+                "ricardogomes42@gmail.com", "12318942122", "03193573572",
+                "ricardogomes", "senharicardo"));
+        l.add(new Colaborador("Josué Fernandes",
+                "Rua Qualquer, Largo Dom João, Diamantina",
+                "josue@gmail.com", "99899899898", "0319852143256",
+                "josue", "123456j"));
+        l.add(new Colaborador("Leila Maria",
+                "Rua Qualquer, 37 Largo Dom João, Diamantina",
+                "leila@exemplo.com", "89889889898", "03195896201",
+                "Leila", "12leila56"));
+        l.add(new Colaborador("Laura Ramos",
+                "Rua da Flores, 55, Largo Dom João, Diamantina",
+                "lauraramos55@gmail.com", "12363489122", "031923342244",
+                "lauraramos", "laurasenharamos"));
+        l.add(new Colaborador("Penha Santos", "Rua do cemitério, 735",
+                "penha@teste.com", "58967489532", "03158796321",
+                "penha", "penha123"));
+        l.add(new Colaborador("Maria da Luz",
+                "Rua Testando 123, Largo Dom João, Diamantina",
+                "mariinha@gmail.com", "88988988989", "031912548963",
+                "mariinha", "senha12"));
+        l.add(new Colaborador("Antônio",
+                "Rua Sei Lá Qual, 85, Largo Dom João, Diamantina",
+                "antonio@gmail.com", "77877877878", "031988885546",
+                "antonio", "1ant2"));
+        l.add(new Colaborador("Cláudio Pereira",
+                "Avenida 1, 55, Palha, Diamantina",
+                "claudiopereira123@gmail.com", "19873489122", "03192332314",
+                "claudiopereira", "senhaclaudio"));
+        l.add(new Colaborador("Luciana",
+                "Rua das Flores, 632 Largo Dom João, Diamantina",
+                "luciana@gmail.com", "55855855858", "031933334445",
+                "luciana", "tialulinda"));
+        l.add(new Colaborador("Jorge",
+                "Rua dos Vovôs, 145 Largo Dom João, Diamantina",
+                "jorge@gmail.com", "55855855695", "031925896320",
+                "jorge", "senhaj"));
+        l.add(new Colaborador("Emanuel Ventura",
+                "Rua do TI, 01, Palha, Diamantina", "emanuel@exemplo.com",
+                "66666655569", "038914523698", "manel", "senhadomanek"));
+        l.add(new Colaborador("Cristiano Paulo Nunes" ,
+                "Rua das Pedras, 34, Largo Dom João, Diamantina",
+                "cpnunesdiamantina@gmail.com", "1235724335", "031922334482",
+                "cristianopnunes", "csenhapn"));
+        
         return l;
     }
     
