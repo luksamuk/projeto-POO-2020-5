@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 /** Representa o Sistema de gerenciamento de Loja de Materiais.
  * Este sistema deve ser instanciado uma única vez pela aplicação. Portanto,
@@ -195,10 +198,13 @@ public final class Sistema implements Serializable {
     }
     
     /**
-     * Imprime a lista completa de clientes na saída padrão do console.
+     * Imprime a lista completa de clientes na saída padrão do console. A lista
+     * de clientes será impressa usando a ordem alfabética.
      */
     public void mostraClientes() {
-        for(Cliente c : clientes.values()) {
+        List<Cliente> lista = new ArrayList(clientes.values());
+        Collections.sort(lista);
+        for(Cliente c : lista) {
             System.out.println(c);
             System.out.println();
         }

@@ -103,6 +103,7 @@ public final class LojaConstrucao {
                         System.out.println("Clientes: " + sistema.getInstanciasClientes());
                         System.out.println("Colaboradores: " + sistema.getInstanciasColaboradores());
                         System.out.println("Nota: O número de instâncias pode não corresponder ao número de cadastros no sistema.");
+                        System.out.println("Nota: Dados recuperados de um arquivo salvo não modificarão estes valores.");
                         break;
                     case 9:
                         executando = false;

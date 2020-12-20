@@ -86,7 +86,8 @@ public class Colaborador extends Pessoa {
     /**
      * Retorna o número de instâncias de Colaborador criadas desde o início da
      * execução da aplicação. Este número pode não condizer com a quantidade de
-     * colaboradores cadastrados.
+     * colaboradores cadastrados. Caso o colaborador seja carregado por um
+     * processo de desserialização, este número não será recuperado.
      * @return Número de instâncias de Colaborador criadas.
      */
     public static int getNumInstances() {

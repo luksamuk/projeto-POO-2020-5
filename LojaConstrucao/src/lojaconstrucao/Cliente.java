@@ -57,7 +57,9 @@ public final class Cliente extends Pessoa {
     
     /**
      * Redefine o número de instâncias da classe Cliente criadas desde o início
-     * da execução da aplicação.
+     * da execução da aplicação. Este número pode não condizer com a quantidade
+     * de clientes cadastrados. Caso o cliente seja carregado a partir de um
+     * processo de desserialização, este número não será recuperado.
      * @param num Novo número de instâncias a ser utilizado.
      */
     public void setNumInstances(int num) {

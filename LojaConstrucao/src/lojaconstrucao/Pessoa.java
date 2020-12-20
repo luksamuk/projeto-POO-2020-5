@@ -156,12 +156,20 @@ public abstract class Pessoa implements Comparable<Pessoa>, Serializable {
     
     /**
      * Compara duas pessoas através do nome das mesmas, em ordem alfabética.
+     * Se as pessoas possuírem os exatos mesmos atributos (à exceção do CPF),
+     * então elas serão exatamente iguais.
      * @param p Pessoa ao qual se quer comparar.
      * @return Número inteiro representando a comparação de acordo com ordem
      * alfabética.
      */
     @Override
     public int compareTo(Pessoa p) {
-        return p.getNome().compareTo(this.nome);
+        if(p.getNome().equals(this.nome)
+           && p.getEndereco().equals(this.endereco)
+           && p.getEmail().equals(this.email)
+           && p.getTelefone().equals(this.telefone)) {
+            return 0;
+        }
+        return -p.getNome().compareTo(this.nome);
     }
 }
