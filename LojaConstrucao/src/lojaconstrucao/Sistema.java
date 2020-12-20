@@ -18,6 +18,7 @@ import java.util.HashMap;
  */
 public final class Sistema {
     private static Sistema instance;
+    private static int last_id_material = 0;
     
     private Map<String, Colaborador> colaboradores;
     private Map<Integer, Venda>      vendas;
@@ -136,8 +137,31 @@ public final class Sistema {
         return false;
     }
     
-    public boolean incluirMaterial(Material m, int codigo) {
-        return false;
+    public int incluirMaterial(Material m) {
+        int id = last_id_material;
+        materiais.put(id, m);
+        last_id_material++;
+        return id;
+    }
+    
+    public boolean removeMaterial(int id) {
+        Material m = getMaterial(id);
+        if(m == null) {
+            return false;
+        }
+        materiais.remove(id);
+        return true;
+    }
+    
+    public Material getMaterial(int id) {
+        return materiais.get(id);
+    }
+    
+    public void mostraEstoque() {
+        for(Material m : materiais.values()) {
+            System.out.println(m);
+            System.out.println();
+        }
     }
     
     public boolean consultarVendas() {

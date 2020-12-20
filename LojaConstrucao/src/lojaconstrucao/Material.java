@@ -26,10 +26,10 @@ public final class Material {
             String especificacao, float margemLucro, Date dataFabricacao,
             String fornecedor) {
         this.nome = nome;
-        this.quantidade = quantidade;
-        this.preco = preco;
+        setQuantidade(quantidade);
+        setPreco(preco);
         this.especificacao = especificacao;
-        this.margemLucro = margemLucro;
+        setMargemLucro(margemLucro);
         this.dataFabricacao = dataFabricacao;
         this.fornecedor = fornecedor;
     }
@@ -47,6 +47,11 @@ public final class Material {
     }
 
     public void setQuantidade(int quantidade) {
+        if(quantidade < 0) {
+            System.err.println(
+                    "Atenção: Quantidade de material inválida; corrija a atribuição");
+            quantidade = 0;
+        }    
         this.quantidade = quantidade;
     }
 
@@ -55,6 +60,10 @@ public final class Material {
     }
 
     public void setPreco(float preco) {
+        if(preco < 0.0f) {
+            System.err.println("Atenção: Preço de material inválido; corrija a atribuição");
+            preco = 0.0f;
+        }
         this.preco = preco;
     }
 
@@ -71,6 +80,13 @@ public final class Material {
     }
 
     public void setMargemLucro(float margemLucro) {
+        if(margemLucro < 0.0f) {
+            System.err.println("Atenção: Margem de lucro de material inválida; corrija a atribuição");
+            margemLucro = 0.0f;
+        } else if (margemLucro > this.preco) {
+            System.err.println("Atenção: Margem de lucro maior que preço; corrija a atribuição");
+            margemLucro = 0.0f;
+        }
         this.margemLucro = margemLucro;
     }
 
@@ -92,7 +108,7 @@ public final class Material {
     
     @Override
     public String toString() {
-        return  "Nome do material:       " + this.nome
+        return   "Nome do material:      " + this.nome
              + "\nFornecedor:            " + this.fornecedor
              + "\nQuantidade em estoque: " + this.quantidade
              + "\nPreço unitário:        " + this.preco

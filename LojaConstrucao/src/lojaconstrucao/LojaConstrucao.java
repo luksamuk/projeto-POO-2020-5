@@ -4,6 +4,10 @@
  */
 package lojaconstrucao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /** Ponto de entrada de execução da aplicação.
@@ -41,7 +45,7 @@ public final class LojaConstrucao {
                     "1. Realizar " + ((usuario == null)
                                         ? "login"
                                         : "logoff") + "\n"
-                  + "2. Realizar venda\n"
+                  + "2. Gerenciar vendas\n"
                   + "3. Gerenciar materiais\n"
                   + "4. Gerenciar clientes\n"
                   + "5. Gerenciar colaboradores\n"
@@ -78,7 +82,7 @@ public final class LojaConstrucao {
                         }
                         break;
                     case 2:
-                        LojaConstrucao.realizaVendas(usuario);
+                        LojaConstrucao.crudVendas(usuario);
                         break;
                     case 3:
                         LojaConstrucao.crudMateriais(usuario);
@@ -109,17 +113,176 @@ public final class LojaConstrucao {
     
     /* ===== VENDAS ===== */
     
-    private static void realizaVendas(Colaborador c) {
+    private static void crudVendas(Colaborador c) {
         // TODO: Imprimir extrato logo após realização da venda!
-        System.out.println("Realização de vendas não implementada!\n");
+        System.out.println("Gerência de vendas não implementada!\n");
     }
     
     
     /* ===== MATERIAIS ===== */
     
     private static void cadastroMaterial(Administrador adm) {
+        String nome, especificacao, fornecedor;
+        int quantidade;
+        float preco = 0.0f;
+        float margemLucro = 0.0f;
+        Date dataFabricacao = new Date();
         
-    }    
+        // Formatador de datas a partir de string
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        System.out.print("Nome:            ");
+        nome = scanner.nextLine().trim();
+        do {
+            System.out.print("Quantidade:      ");
+            quantidade = scanner.nextInt();
+            scanner.nextLine();
+            if(quantidade <= 0) {
+                System.err.println("Quantidade inválida!");
+            }
+        } while(quantidade <= 0);
+        do {
+            System.out.print("Preço:           ");
+            try {
+                preco = scanner.nextFloat();
+                if(preco <= 0.0f) {
+                    System.err.println("Preço inválido!");
+                }
+            } catch(InputMismatchException e) {
+                System.err.println("Digite novamente. Você esqueceu uma vírgula?");
+            } finally {
+                scanner.nextLine();
+            }
+        } while(preco <= 0.0f);
+        do {
+            System.out.print("Margem de lucro: ");
+            try {
+                margemLucro = scanner.nextFloat();
+                if((margemLucro <= 0.0f) || (margemLucro > preco)) {
+                    System.err.println("Margem de lucro inválida!");
+                }
+            } catch(InputMismatchException e) {
+                System.err.println("Digite novamente. Você esqueceu uma vírgula?");
+            } finally {
+                scanner.nextLine();
+            }
+        } while((margemLucro <= 0.0f) || (margemLucro > preco));
+        System.out.print("Especificação:   ");
+        especificacao = scanner.nextLine().trim();
+        // Parseando a entrada de data
+        boolean dateOk;
+        do {
+            System.out.print("Data de fabricação (dd/mm/aaaa): ");
+            try {
+                dataFabricacao = sdf.parse(scanner.nextLine().trim());
+                System.out.println("Data informada: " + dataFabricacao);
+                System.out.print("Correto? (s/n): ");
+                dateOk = scanner.nextLine().trim()
+                        .toLowerCase()
+                        .startsWith("s");
+            } catch(ParseException e) {
+                System.err.println("Erro na declaração da data: " + e);
+                dateOk = false;
+            }
+        } while(!dateOk);
+        
+        System.out.print("Fornecedor:    ");
+        fornecedor = scanner.nextLine().trim();
+        
+        var m = new Material(nome, quantidade, preco, especificacao,
+                margemLucro, dataFabricacao, fornecedor);
+        sistema.incluirMaterial(m);
+        System.out.println("Material cadastrado com sucesso:\n" + m);
+    }
+    
+    private static void atualizaMaterial(Administrador adm) {
+        System.out.print("Digite o ID do material: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Material m = sistema.getMaterial(id);
+        if(m == null) {
+            System.err.println("Material de ID #" + id + " não encontrado.");
+            return;
+        }
+        
+        // Formatador de datas a partir de string
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        int quantidade = 0;
+        float preco = 0.0f, margemLucro = 0.0f;
+        Date dataFabricacao;
+        
+        System.out.print("Nome:            ");
+        m.setNome(scanner.nextLine().trim());
+        do {
+            System.out.print("Quantidade:      ");
+            quantidade = scanner.nextInt();
+            scanner.nextLine();
+            if(quantidade <= 0) {
+                System.err.println("Quantidade inválida!");
+            } else {
+                m.setQuantidade(quantidade);
+            }
+        } while(quantidade <= 0);
+        do {
+            System.out.print("Preço:           ");
+            try {
+                preco = scanner.nextFloat();
+                if(preco <= 0.0f) {
+                    System.err.println("Preço inválido!");
+                } else {
+                    m.setPreco(preco);
+                }
+            } catch(InputMismatchException e) {
+                System.err.println("Digite novamente. Você esqueceu uma vírgula?");
+            } finally {
+                scanner.nextLine();
+            }
+        } while(preco <= 0.0f);
+        do {
+            System.out.print("Margem de lucro: ");
+            try {
+                margemLucro = scanner.nextFloat();
+                if((margemLucro <= 0.0f) || (margemLucro > preco)) {
+                    System.err.println("Margem de lucro inválida!");
+                } else {
+                    m.setMargemLucro(margemLucro);
+                }
+            } catch(InputMismatchException e) {
+                System.err.println("Digite novamente. Você esqueceu uma vírgula?");
+            } finally {
+                scanner.nextLine();
+            }
+        } while((margemLucro <= 0.0f) || (margemLucro > preco));
+        System.out.print("Especificação:   ");
+        m.setEspecificacao(scanner.nextLine().trim());
+ 
+        // Entrada de data
+        boolean dateOk;
+        do {
+            System.out.print("Data de fabricação (dd/mm/aaaa): ");
+            try {
+                dataFabricacao = sdf.parse(scanner.nextLine().trim());
+                System.out.println("Data informada: " + dataFabricacao);
+                System.out.print("Correto? (s/n): ");
+                dateOk = scanner.nextLine().trim()
+                        .toLowerCase()
+                        .startsWith("s");
+                if(dateOk) {
+                    m.setDataFabricacao(dataFabricacao);
+                }
+            } catch(ParseException e) {
+                System.err.println("Erro na declaração da data: " + e);
+                dateOk = false;
+            }
+        } while(!dateOk);
+        
+        System.out.print("Fornecedor:    ");
+        m.setFornecedor(scanner.nextLine().trim());
+        
+        System.out.println("Dados atualizados com sucesso:");
+        System.out.println(m);
+        System.out.println();
+    }
     
     private static void crudMateriais(Colaborador c) {
         // Cadastro, atualização: Administração.
@@ -135,13 +298,14 @@ public final class LojaConstrucao {
                   + "3. Remover material (administrador)\n"
                   + "4. Imprimir dados de um material\n"
                   + "5. Imprimir estoque\n"
-                  + "4. Voltar\n"
-                  + "5. Sair\n"
+                  + "6. Voltar\n"
+                  + "7. Sair\n"
             );
             
             System.out.print("Sua opção: ");
             
             int option = scanner.nextInt();
+            int id;
             scanner.nextLine();
             
             switch(option) {
@@ -150,27 +314,44 @@ public final class LojaConstrucao {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Cadastro não implementado");
+                    cadastroMaterial((Administrador)c);
                     break;
                 case 2:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Atualização de dados não implementada");
+                    atualizaMaterial((Administrador)c);
                     break;
                 case 3:
                     if(!is_admin) {
                         System.out.println(errmsg);
                         break;
                     }
-                    System.err.println("Remoção não implementada");
+                    System.out.print("Digite o ID do material: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    if(sistema.removeMaterial(id)) {
+                        System.out.println("Material #" + id + " removido com sucesso!\n");
+                    } else {
+                        System.err.println("Material de ID #" + id + " não encontrado!");
+                    }
                     break;
                 case 4:
-                    System.err.println("Mostrar dados não implementada");
+                    System.out.print("Digite o ID do material: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    Material m = sistema.getMaterial(id);
+                    if(m != null) {
+                        System.out.println("Dados do Material #" + id + ":");
+                        System.out.println(m);
+                        System.out.println();
+                    } else {
+                        System.err.println("Material de ID #" + id + " não encontrado!");
+                    }
                     break;
                 case 5:
-                    System.err.println("Mostrar estoque não implementada");
+                    sistema.mostraEstoque();
                     break;
                 case 6: return;
                 case 7:
