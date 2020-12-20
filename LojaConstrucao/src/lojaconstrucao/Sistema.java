@@ -298,6 +298,11 @@ public final class Sistema implements Serializable {
         return "Singleton do Sistema Loja de Materiais";
     }
     
+    /**
+     * Salva as informações do sistema em um arquivo binário.
+     * @throws IOException se houver algum erro na escrita ou abertura do
+     * arquivo.
+     */
     public void salvaInformacoes() throws IOException {
         FileOutputStream fstream = new FileOutputStream(DATA_FILENAME);
         ObjectOutputStream ostream = new ObjectOutputStream(fstream);
@@ -306,7 +311,15 @@ public final class Sistema implements Serializable {
         ostream.close();
     }
     
-    public static Sistema recuperaInformacoes() throws IOException {
+    /**
+     * Lê as informações do sistema a partir de um arquivo binário e gera uma
+     * instância do sistema a partir disso.
+     * @return Uma instância do sistema, caso seja possível criá-la, ou `null`
+     * se o objeto lido não for uma instância adequada do sistema.
+     * @throws IOException se houver algum erro na leitura ou abertura do
+     * arquivo.
+     */
+    private static Sistema recuperaInformacoes() throws IOException {
         FileInputStream fstream = new FileInputStream(DATA_FILENAME);
         ObjectInputStream ostream = new ObjectInputStream(fstream);
         Sistema sist = null;
