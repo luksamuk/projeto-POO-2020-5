@@ -22,8 +22,12 @@ public final class LojaConstrucao {
     private static boolean executando;
     private static Scanner scanner;
     
-    /** Método estático chamado no início da execução do programa.
-     * @param args Argumentos fornecidos via linha de comando.
+    /* ===== PONTO DE ENTRADA DA APLICAÇÃO ===== */
+    
+    /** Método estático chamado no início da execução do programa. Exibe um menu
+     * via console que pode ser utilizado para gerenciar o sistema.
+     * @param args Argumentos fornecidos via linha de comando, ignorados por
+     * padrão.
      */
     public static void main(String[] args) {
         // Inicialização
@@ -111,15 +115,235 @@ public final class LojaConstrucao {
         } while(executando);
     }
     
-    /* ===== VENDAS ===== */
+    /* ===== SUBMENUS ===== */
+    // Os métodos a seguir gerenciam submenus da aplicação.
     
+    /* Submenu de vendas */
     private static void crudVendas(Colaborador c) {
         // TODO: Imprimir extrato logo após realização da venda!
         System.out.println("Gerência de vendas não implementada!\n");
     }
     
+    /* Submenu de materiais */
+    private static void crudMateriais(Colaborador c) {
+        // Cadastro, atualização: Administração.
+        // Consulta: Colaborador.
+        boolean is_admin = c instanceof Administrador;
+        String errmsg = "Você não é um administrador. E você sabe disso.";
+        
+        while(true) {
+            System.out.println("*** Gerenciamento de materiais ***");
+            System.out.println(
+                    "1. Cadastrar material (administrador)\n"
+                  + "2. Atualizar dados de material (administrador)\n"
+                  + "3. Remover material (administrador)\n"
+                  + "4. Imprimir dados de um material\n"
+                  + "5. Imprimir estoque\n"
+                  + "6. Voltar\n"
+                  + "7. Sair\n"
+            );
+            
+            System.out.print("Sua opção: ");
+            
+            int option = scanner.nextInt();
+            int id;
+            scanner.nextLine();
+            
+            switch(option) {
+                case 1:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    cadastroMaterial((Administrador)c);
+                    break;
+                case 2:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    atualizaMaterial((Administrador)c);
+                    break;
+                case 3:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    System.out.print("Digite o ID do material: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    if(sistema.removeMaterial(id)) {
+                        System.out.println("Material #" + id + " removido com sucesso!\n");
+                    } else {
+                        System.err.println("Material de ID #" + id + " não encontrado!");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Digite o ID do material: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    Material m = sistema.getMaterial(id);
+                    if(m != null) {
+                        System.out.println("Dados do Material #" + id + ":");
+                        System.out.println(m);
+                        System.out.println();
+                    } else {
+                        System.err.println("Material de ID #" + id + " não encontrado!");
+                    }
+                    break;
+                case 5:
+                    sistema.mostraEstoque();
+                    break;
+                case 6: return;
+                case 7:
+                    executando = false;
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+            System.out.println();
+        }
+    }
     
-    /* ===== MATERIAIS ===== */
+    /* Submenu de clientes */
+    private static void crudClientes(Colaborador c) {
+        // Cadastro, atualização: Administração.
+        // Consulta: Colaborador.
+        boolean is_admin = c instanceof Administrador;
+        String errmsg = "Você não é um administrador. E você sabe disso.";
+        
+        while(true) {
+            System.out.println("*** Gerenciamento de clientes ***");
+            System.out.println(
+                    "1. Cadastrar clientes (administrador)\n"
+                  + "2. Atualizar dados de cliente (administrador)\n"
+                  + "3. Remover cliente (administrador)\n"
+                  + "4. Imprimir dados de cliente\n"
+                  + "5. Mostrar lista de clientes\n"
+                  + "6. Voltar\n"
+                  + "7. Sair\n"
+            );
+            
+            System.out.print("Sua opção: ");
+            
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch(option) {
+                case 1:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    cadastroCliente((Administrador)c);
+                    break;
+                case 2:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    alteraCliente((Administrador)c);
+                    break;
+                case 3:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    removeCliente((Administrador)c);
+                    break;
+                case 4:
+                    String cpf;
+                    System.out.print("CPF:      ");
+                    cpf = scanner.nextLine().trim();
+                    Cliente cl = sistema.getCliente(cpf);
+                    if(cl != null) {
+                        System.out.println(cl);
+                    } else {
+                        System.err.println("Cliente não encontrado.");
+                    }
+                    break;
+                case 5:
+                    sistema.mostraClientes();
+                    break;
+                case 6: return;
+                case 7:
+                    executando = false;
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+            System.out.println();
+        }
+    }
+    
+    /* Submenu de colaboradores */
+    private static void crudColaboradores(Colaborador c) {
+        // Cadastro, atualização: Administração.
+        // Consulta: Colaborador.
+        boolean is_admin = c instanceof Administrador;
+        String errmsg = "Você não é um administrador. E você sabe disso.";
+        
+        while(true) {
+            System.out.println("*** Gerenciamento de colaboradores ***");
+            System.out.println(
+                    "1. Cadastrar colaborador (administrador)\n"
+                  + "2. Atualizar dados de colaborador (administrador)\n"
+                  + "3. Remover colaborador (administrador)\n"
+                  + "4. Voltar\n"
+                  + "5. Sair\n"
+            );
+            
+            System.out.print("Sua opção: ");
+            
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch(option) {
+                case 1:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    cadastroColaborador((Administrador)c);
+                    break;
+                case 2:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    alteraColaborador((Administrador)c);
+                    break;
+                case 3:
+                    if(!is_admin) {
+                        System.out.println(errmsg);
+                        break;
+                    }
+                    removeColaborador((Administrador)c);
+                    break;
+                case 4: return;
+                case 5:
+                    executando = false;
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+            System.out.println();
+        }
+    }
+    
+    /* ===== CRUDS DE ENTIDADES DO SISTEMA ===== */
+    // As seções a seguir enumeram métodos relacionados à execução de
+    // CRUDs com entidades em específico. Os métodos são responsáveis por
+    // interagir com o usuário, assim como menus. Portanto, constituem uma
+    // certa forma de submenu também, com algumas validações de entradas.
+    
+    /* ----- VENDAS ----- */
+    
+    
+    /* ----- MATERIAIS ----- */
     
     private static void cadastroMaterial(Administrador adm) {
         String nome, especificacao, fornecedor;
@@ -284,88 +508,7 @@ public final class LojaConstrucao {
         System.out.println();
     }
     
-    private static void crudMateriais(Colaborador c) {
-        // Cadastro, atualização: Administração.
-        // Consulta: Colaborador.
-        boolean is_admin = c instanceof Administrador;
-        String errmsg = "Você não é um administrador. E você sabe disso.";
-        
-        while(true) {
-            System.out.println("*** Gerenciamento de materiais ***");
-            System.out.println(
-                    "1. Cadastrar material (administrador)\n"
-                  + "2. Atualizar dados de material (administrador)\n"
-                  + "3. Remover material (administrador)\n"
-                  + "4. Imprimir dados de um material\n"
-                  + "5. Imprimir estoque\n"
-                  + "6. Voltar\n"
-                  + "7. Sair\n"
-            );
-            
-            System.out.print("Sua opção: ");
-            
-            int option = scanner.nextInt();
-            int id;
-            scanner.nextLine();
-            
-            switch(option) {
-                case 1:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    cadastroMaterial((Administrador)c);
-                    break;
-                case 2:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    atualizaMaterial((Administrador)c);
-                    break;
-                case 3:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    System.out.print("Digite o ID do material: ");
-                    id = scanner.nextInt();
-                    scanner.nextLine();
-                    if(sistema.removeMaterial(id)) {
-                        System.out.println("Material #" + id + " removido com sucesso!\n");
-                    } else {
-                        System.err.println("Material de ID #" + id + " não encontrado!");
-                    }
-                    break;
-                case 4:
-                    System.out.print("Digite o ID do material: ");
-                    id = scanner.nextInt();
-                    scanner.nextLine();
-                    Material m = sistema.getMaterial(id);
-                    if(m != null) {
-                        System.out.println("Dados do Material #" + id + ":");
-                        System.out.println(m);
-                        System.out.println();
-                    } else {
-                        System.err.println("Material de ID #" + id + " não encontrado!");
-                    }
-                    break;
-                case 5:
-                    sistema.mostraEstoque();
-                    break;
-                case 6: return;
-                case 7:
-                    executando = false;
-                    return;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
-            }
-            System.out.println();
-        }
-    }
-    
-    /* ===== CLIENTES ===== */
+    /* ----- CLIENTES ----- */
     
     private static void cadastroCliente(Administrador adm) {
         String nome, endereco, email, cpf, telefone;
@@ -430,78 +573,7 @@ public final class LojaConstrucao {
         }
     }
     
-    private static void crudClientes(Colaborador c) {
-        // Cadastro, atualização: Administração.
-        // Consulta: Colaborador.
-        boolean is_admin = c instanceof Administrador;
-        String errmsg = "Você não é um administrador. E você sabe disso.";
-        
-        while(true) {
-            System.out.println("*** Gerenciamento de clientes ***");
-            System.out.println(
-                    "1. Cadastrar clientes (administrador)\n"
-                  + "2. Atualizar dados de cliente (administrador)\n"
-                  + "3. Remover cliente (administrador)\n"
-                  + "4. Imprimir dados de cliente\n"
-                  + "5. Mostrar lista de clientes\n"
-                  + "6. Voltar\n"
-                  + "7. Sair\n"
-            );
-            
-            System.out.print("Sua opção: ");
-            
-            int option = scanner.nextInt();
-            scanner.nextLine();
-            
-            switch(option) {
-                case 1:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    cadastroCliente((Administrador)c);
-                    break;
-                case 2:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    alteraCliente((Administrador)c);
-                    break;
-                case 3:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    removeCliente((Administrador)c);
-                    break;
-                case 4:
-                    String cpf;
-                    System.out.print("CPF:      ");
-                    cpf = scanner.nextLine().trim();
-                    Cliente cl = sistema.getCliente(cpf);
-                    if(cl != null) {
-                        System.out.println(cl);
-                    } else {
-                        System.err.println("Cliente não encontrado.");
-                    }
-                    break;
-                case 5:
-                    sistema.mostraClientes();
-                    break;
-                case 6: return;
-                case 7:
-                    executando = false;
-                    return;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
-            }
-            System.out.println();
-        }
-    }
-    
-    /* ===== COLABORADOR ===== */
+    /* ----- COLABORADOR ----- */
     
     private static void cadastroColaborador(Administrador adm) {
         String nome, endereco, email, cpf, telefone, login, senha;
@@ -567,61 +639,6 @@ public final class LojaConstrucao {
             System.out.println("Dados modificados com sucesso.\n");
         } else {
             System.err.println("Erro ao atualizar dados: Colaborador não encontrado.");
-        }
-    }
-    
-    private static void crudColaboradores(Colaborador c) {
-        // Cadastro, atualização: Administração.
-        // Consulta: Colaborador.
-        boolean is_admin = c instanceof Administrador;
-        String errmsg = "Você não é um administrador. E você sabe disso.";
-        
-        while(true) {
-            System.out.println("*** Gerenciamento de colaboradores ***");
-            System.out.println(
-                    "1. Cadastrar colaborador (administrador)\n"
-                  + "2. Atualizar dados de colaborador (administrador)\n"
-                  + "3. Remover colaborador (administrador)\n"
-                  + "4. Voltar\n"
-                  + "5. Sair\n"
-            );
-            
-            System.out.print("Sua opção: ");
-            
-            int option = scanner.nextInt();
-            scanner.nextLine();
-            
-            switch(option) {
-                case 1:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    cadastroColaborador((Administrador)c);
-                    break;
-                case 2:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    alteraColaborador((Administrador)c);
-                    break;
-                case 3:
-                    if(!is_admin) {
-                        System.out.println(errmsg);
-                        break;
-                    }
-                    removeColaborador((Administrador)c);
-                    break;
-                case 4: return;
-                case 5:
-                    executando = false;
-                    return;
-                default:
-                    System.out.println("Opção inválida!");
-                    break;
-            }
-            System.out.println();
         }
     }
     
