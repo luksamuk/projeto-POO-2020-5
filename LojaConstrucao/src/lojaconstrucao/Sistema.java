@@ -277,9 +277,14 @@ public final class Sistema implements Serializable {
         return id;
     }
 
-    public boolean consultarVenda(Colaborador c) {
-        // TO-DO
-        return false;
+    /**
+     * Recupera uma venda cadastrada no sistema.
+     * @param id ID da venda a ser recuperada.
+     * @return Uma referência à venda cujo ID seja igual ao informado, ou `null`
+     * se a venda não foi encontrada.
+     */
+    public Venda getVenda(int id) {
+        return vendas.get(id);
     }
     
     /**

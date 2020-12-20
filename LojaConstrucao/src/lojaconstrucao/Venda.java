@@ -42,16 +42,18 @@ public class Venda implements Serializable {
      * @param m Material a ser vendido.
      * @param quantidade Quantidade de material a ser vendido.
      * @throws MaterialException se a quantidade informada for negativa ou maior
-     * que a quantidade em estoque, ou se o material não estiver cadastrado no
-     * sistema.
+     * que a quantidade em estoque, se o material não estiver cadastrado no
+     * sistema, ou se o material já estiver cadastrado na compra.
      */
     public void insereMaterial(Material m, int quantidade) throws MaterialException {
-        if(quantidade < 0) {
+        if(quantidade <= 0) {
             throw new MaterialException("Quantidade inválida");
         } else if(m.getID() < 0) {
             throw new MaterialException("Material não cadastrado no sistema");
         } else if(quantidade > m.getQuantidade()) {
             throw new MaterialException("Estoque de material insuficiente");
+        } else if(materiais.contains(m)) {
+            throw new MaterialException("Impossível adicionar material de mesmo tipo");
         }
         materiais.add(m);
         quantidades.put(m, quantidade);

@@ -137,8 +137,8 @@ public final class LojaConstrucao {
                       "1. Realizar venda\n"
                     + "2. Consultar venda\n"
                     + "3. Listar vendas\n"
-                    + "3. Voltar\n"
-                    + "4. Sair\n"
+                    + "4. Voltar\n"
+                    + "5. Sair\n"
             );
             
             System.out.print("Sua opção: ");
@@ -151,7 +151,7 @@ public final class LojaConstrucao {
                     LojaConstrucao.cadastroVenda(c);
                     break;
                 case 2:
-                    System.err.println("Consulta a vendas não implementada");
+                    LojaConstrucao.consultaVenda(c);
                     break;
                 case 3:
                     sistema.mostraVendas();
@@ -433,22 +433,34 @@ public final class LojaConstrucao {
                     v.insereMaterial(m, input);
                 } catch(MaterialException e) {
                     System.err.println("Erro ao adicionar material: " + e);
-                    input = -1;
                 }
-            } else {
-                input = -1;
-            }
+            } 
+            input = -1;
         } while(input < 0);
         
         // Registra a venda
-        sistema.realizaVenda(c, cl, v);
-        System.out.println("Venda realizada com sucesso.");
-        System.out.println("Extrato de venda:");
-        System.out.println(v);
+        if(v.getNumMateriais() <= 0) {
+            System.out.println("Venda cancelada.");
+        } else {
+            sistema.realizaVenda(c, cl, v);
+            System.out.println("Venda realizada com sucesso.");
+            System.out.println("Extrato de venda:");
+            System.out.println(v);
+        }
     }
     
     private static void consultaVenda(Colaborador c) {
+        int id;
+        System.out.print("Insira o ID da venda: ");
+        id = scanner.nextInt();
+        scanner.nextLine();
         
+        Venda v = sistema.getVenda(id);
+        if(v == null) {
+            System.err.println("Venda não encontrada!");
+            return;
+        }
+        System.out.println(v);
     }
     
     /* ----- MATERIAIS ----- */
