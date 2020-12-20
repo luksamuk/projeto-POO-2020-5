@@ -27,7 +27,7 @@ public final class Sistema implements Serializable {
     // Todavia, atributos de classe não são serializados por padrão.
     // O uso da palavra-chave é apenas por garantia.
     private static transient Sistema instance;
-    private static final transient String dataFilename = "loja_data.bin";
+    private static final transient String DATA_FILENAME = "loja_data.bin";
     
     private int last_id_material = 0;
     
@@ -80,7 +80,8 @@ public final class Sistema implements Serializable {
             try {
                 instance = Sistema.recuperaInformacoes();
             } catch(IOException e) {
-                System.err.println("Dados anteriores não encontrados. Criando novos dados...");
+                System.err.println(
+                        "Dados anteriores não encontrados. Criando novos dados...");
                 instance = new Sistema();
             }
         }
@@ -298,21 +299,22 @@ public final class Sistema implements Serializable {
     }
     
     public void salvaInformacoes() throws IOException {
-        FileOutputStream fstream = new FileOutputStream(dataFilename);
+        FileOutputStream fstream = new FileOutputStream(DATA_FILENAME);
         ObjectOutputStream ostream = new ObjectOutputStream(fstream);
         ostream.writeObject(this);
         ostream.flush();
         ostream.close();
     }
     
-    public static Sistema recuperaInformacoes()
-            throws IOException {
-        FileInputStream fstream = new FileInputStream(dataFilename);
+    public static Sistema recuperaInformacoes() throws IOException {
+        FileInputStream fstream = new FileInputStream(DATA_FILENAME);
         ObjectInputStream ostream = new ObjectInputStream(fstream);
         Sistema sist = null;
         try {
             sist = (Sistema)ostream.readObject();
-        } catch(ClassNotFoundException e) {}
+        } catch(ClassNotFoundException e) {
+            throw new IOException("Impossível ler objeto");
+        }
         return sist;
     }
 }
