@@ -4,6 +4,7 @@
  */
 package lojaconstrucao;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +17,7 @@ import java.util.Map;
  * @author Luísa Vitória Guimarães Silva
  * @version 1.0
  */
-public class Venda {
+public class Venda implements Serializable {
     private int idVenda;
     private Date data;
     private float valorTotal;

@@ -4,6 +4,12 @@
  */
 package lojaconstrucao;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -16,9 +22,10 @@ import java.util.HashMap;
  * @author Luísa Vitória Guimarães Silva
  * @version 1.0
  */
-public final class Sistema {
-    private static Sistema instance;
-    private static int last_id_material = 0;
+public final class Sistema implements Serializable {
+    private static transient Sistema instance;
+    private static final transient String dataFilename = "loja_data.bin";
+    private int last_id_material = 0;
     
     private Map<String, Colaborador> colaboradores;
     private Map<Integer, Venda>      vendas;
@@ -66,7 +73,12 @@ public final class Sistema {
      */
     public static Sistema getInstance() {
         if(instance == null) {
-            instance = new Sistema();
+            try {
+                instance = Sistema.recuperaInformacoes();
+            } catch(IOException e) {
+                System.err.println("Dados anteriores não encontrados. Criando novos dados...");
+                instance = new Sistema();
+            }
         }
         return instance;
     }
@@ -279,5 +291,24 @@ public final class Sistema {
     @Override
     public String toString() {
         return "Singleton do Sistema Loja de Materiais";
+    }
+    
+    public void salvaInformacoes() throws IOException {
+        FileOutputStream fstream = new FileOutputStream(dataFilename);
+        ObjectOutputStream ostream = new ObjectOutputStream(fstream);
+        ostream.writeObject(this);
+        ostream.flush();
+        ostream.close();
+    }
+    
+    public static Sistema recuperaInformacoes()
+            throws IOException {
+        FileInputStream fstream = new FileInputStream(dataFilename);
+        ObjectInputStream ostream = new ObjectInputStream(fstream);
+        Sistema sist = null;
+        try {
+            sist = (Sistema)ostream.readObject();
+        } catch(ClassNotFoundException e) {}
+        return sist;
     }
 }

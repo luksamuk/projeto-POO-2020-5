@@ -4,6 +4,7 @@
  */
 package lojaconstrucao;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** Representa um material armazenado no estoque do Sistema de Loja de
@@ -13,7 +14,7 @@ import java.util.Date;
  * @author Luísa Vitória Guimarães Silva
  * @version 1.0
  */
-public final class Material {
+public final class Material implements Serializable {
     private int idMaterial;
     private String nome;
     private int quantidade;
