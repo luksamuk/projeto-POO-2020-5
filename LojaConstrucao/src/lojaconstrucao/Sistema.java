@@ -23,8 +23,12 @@ import java.util.HashMap;
  * @version 1.0
  */
 public final class Sistema implements Serializable {
+    // Atributos "transient" não serão serializados.
+    // Todavia, atributos de classe não são serializados por padrão.
+    // O uso da palavra-chave é apenas por garantia.
     private static transient Sistema instance;
     private static final transient String dataFilename = "loja_data.bin";
+    
     private int last_id_material = 0;
     
     private Map<String, Colaborador> colaboradores;
