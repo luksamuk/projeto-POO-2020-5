@@ -4,6 +4,8 @@
  */
 package lojaconstrucao;
 
+import java.io.Serializable;
+
 /** Provê um guia de implementação de classes que envolvam informações de
  * indivíduos. Esta classe abstrata contém informações que poderiam ser
  * encontradas em clientes e colaboradores.
@@ -12,7 +14,7 @@ package lojaconstrucao;
  * @author Luísa Vitória Guimarães Silva
  * @version 1.0
  */
-public abstract class Pessoa implements Comparable<Pessoa> {
+public abstract class Pessoa implements Comparable<Pessoa>, Serializable {
 
     /**
      * Nome da pessoa.

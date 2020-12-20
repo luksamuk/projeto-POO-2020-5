@@ -4,6 +4,7 @@
  */
 package lojaconstrucao;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -98,7 +99,7 @@ public final class LojaConstrucao {
                         LojaConstrucao.submenuColaboradores(usuario);
                         break;
                     case 6:
-                        System.out.println("Número de instâncias criadas por classe");
+                        System.out.println("Número de instâncias criadas por classe desde o início da execução");
                         System.out.println("Clientes: " + sistema.getInstanciasClientes());
                         System.out.println("Colaboradores: " + sistema.getInstanciasColaboradores());
                         System.out.println("Nota: O número de instâncias pode não corresponder ao número de cadastros no sistema.");
@@ -113,6 +114,12 @@ public final class LojaConstrucao {
             }
             System.out.println();
         } while(executando);
+        
+        try {
+            sistema.salvaInformacoes();
+        } catch(IOException e) {
+            System.err.println("Falha ao salvar dados do sistema em arquivo: " + e);
+        }   
     }
     
     /* ===== SUBMENUS ===== */
