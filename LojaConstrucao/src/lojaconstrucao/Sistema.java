@@ -33,6 +33,7 @@ public final class Sistema implements Serializable {
     private static final transient String DATA_FILENAME = "loja_data.bin";
     
     private int last_id_material = 0;
+    private int last_id_venda    = 0;
     
     private Map<String, Colaborador> colaboradores;
     private Map<Integer, Venda>      vendas;
@@ -259,19 +260,35 @@ public final class Sistema implements Serializable {
         }
     }
     
-    public boolean realizarVenda(Colaborador c, Venda v) {
+    /**
+     * Registra uma venda a um cliente no sistema.
+     * @param c Referência ao colaborador realizador da venda.
+     * @param cl Referência ao cliente a quem a venda será feita.
+     * @param v Referência à venda a ser feita.
+     * @return ID da venda recém-cadastrada.
+     */
+    public int realizaVenda(Colaborador c, Cliente cl, Venda v) {
+        int id = last_id_venda;
+        vendas.put(id, v);
+        v.setID(id);
+        cl.adicionaCompra(v);
+        last_id_venda++;
+        return id;
+    }
+
+    public boolean consultarVenda(Colaborador c) {
         // TO-DO
         return false;
     }
     
-    public boolean cancelarVenda(Administrador adm, Venda v) {
-        // TO-DO
-        return false;
-    }
-
-    public boolean consultarVendas(Colaborador c) {
-        // TO-DO
-        return false;
+    /**
+     * Imprime a lista completa de vendas na saída padrão do console.
+     */
+    public void mostraVendas() {
+        for(Venda v : vendas.values()) {
+            System.out.println(v);
+            System.out.println();
+        }
     }
     
     /**

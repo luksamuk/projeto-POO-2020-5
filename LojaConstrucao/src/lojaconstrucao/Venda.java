@@ -36,6 +36,28 @@ public class Venda implements Serializable {
     }
 
     /**
+     * Adiciona um material à venda atual.
+     * @param m Material a ser vendido.
+     * @param quantidade Quantidade de material a ser vendido.
+     * @throws MaterialException se a quantidade informada for negativa ou maior
+     * que a quantidade em estoque, ou se o material não estiver cadastrado no
+     * sistema.
+     */
+    public void insereMaterial(Material m, int quantidade) throws MaterialException {
+        if(quantidade < 0) {
+            throw new MaterialException("Quantidade inválida");
+        } else if(m.getID() < 0) {
+            throw new MaterialException("Material não cadastrado no sistema");
+        } else if(quantidade > m.getQuantidade()) {
+            throw new MaterialException("Estoque de material insuficiente");
+        }
+        materiais.add(m);
+        quantidades.put(m, quantidade);
+        m.setQuantidade(m.getQuantidade() - quantidade);
+        valorTotal += m.getPreco() * quantidade;
+    }
+    
+    /**
      * Recupera o ID da venda no sistema.
      * @return ID atribuído à venda no sistema, ou -1 se a venda ainda não foi
      * cadastrada.
@@ -67,13 +89,13 @@ public class Venda implements Serializable {
     public float getValorTotal() {
         return valorTotal;
     }
-
-    public Set<Material> getMateriais() {
-        return materiais;
-    }
-
-    public Map<Material, Integer> getQuantidades() {
-        return quantidades;
+    
+    /**
+     * Recupera a quantidade de materiais cadastrados na venda.
+     * @return Quantidade de materiais na venda.
+     */
+    public int getNumMateriais() {
+        return materiais.size();
     }
     
     /**
@@ -86,11 +108,12 @@ public class Venda implements Serializable {
         String buffer = new String();
         buffer += "Venda #" + this.idVenda + "\n";
         buffer += "Data:        " + this.data + "\n";
-        buffer += "Valor Total: " + this.valorTotal + "\n";
+        buffer += "Valor Total: R$" + this.valorTotal + "\n";
         buffer += "Materiais adquiridos:";
         for(Material m : materiais) {
-            buffer += "\n    Nome: " + m.getNome();
-            buffer += "Quantidade: " + quantidades.get(m);
+            buffer += "\n        Nome: " + m.getNome();
+            buffer += "\n  Quantidade: " + quantidades.get(m);
+            buffer += "\n";
         }
         return buffer;
     }
@@ -101,13 +124,5 @@ public class Venda implements Serializable {
      */
     public String gerarExtrato() {
         return this.toString();
-    }
-    
-    public void insereMaterial(Material m, int quantidade) {
-        
-    }
-    
-    public void removeMaterial(Material m) {
-        
     }
 }

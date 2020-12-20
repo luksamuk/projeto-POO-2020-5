@@ -33,8 +33,12 @@ public final class Cliente extends Pessoa {
         setNumInstances(getNumInstances() + 1);
     }
     
-    public void adicionaVenda(Venda v) {
-        
+    /**
+     * Adiciona um registro de venda ao cliente atual.
+     * @param v Venda a ser registrada.
+     */
+    public void adicionaCompra(Venda v) {
+        this.regCompras.add(v);
     }
     
     /**

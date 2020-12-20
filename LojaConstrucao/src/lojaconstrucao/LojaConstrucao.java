@@ -128,8 +128,45 @@ public final class LojaConstrucao {
     
     /* Submenu de vendas */
     private static void submenuVendas(Colaborador c) {
-        // TODO: Imprimir extrato logo após realização da venda!
-        System.out.println("Gerência de vendas não implementada!\n");
+        boolean is_admin = c instanceof Administrador;
+        String errmsg = "Você não é um administrador. E você sabe disso.";
+        
+        while(true) {
+            System.out.println("*** Gerenciamento de vendas ***");
+            System.out.println(
+                      "1. Realizar venda\n"
+                    + "2. Consultar venda\n"
+                    + "3. Listar vendas\n"
+                    + "3. Voltar\n"
+                    + "4. Sair\n"
+            );
+            
+            System.out.print("Sua opção: ");
+            
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch(option) {
+                case 1:
+                    LojaConstrucao.cadastroVenda(c);
+                    break;
+                case 2:
+                    System.err.println("Consulta a vendas não implementada");
+                    break;
+                case 3:
+                    sistema.mostraVendas();
+                    break;
+                case 4:
+                    return;
+                case 5:
+                    executando = false;
+                    return;
+                default:
+                    System.out.println("Opção inválida");
+                    break;
+            }
+            System.out.println();
+        }
     }
     
     /* Submenu de materiais */
@@ -154,8 +191,8 @@ public final class LojaConstrucao {
             System.out.print("Sua opção: ");
             
             int option = scanner.nextInt();
-            int id;
             scanner.nextLine();
+            int id;
             
             switch(option) {
                 case 1:
@@ -350,6 +387,69 @@ public final class LojaConstrucao {
     
     /* ----- VENDAS ----- */
     
+    private static void cadastroVenda(Colaborador c) {
+        Cliente cl;
+        Venda v;
+        
+        // Identificar cliente
+        System.out.print("Insira o CPF do cliente: ");
+        String cpf = scanner.nextLine().trim();
+        cl = sistema.getCliente(cpf);
+        if(cl == null) {
+            System.err.println("Cliente não encontrado!");
+            return;
+        }
+        
+        // Perguntar materiais
+        v = new Venda();
+        int input;
+        do {
+            Material m;
+            
+            System.out.print("ID do material (-1 para cancelar): ");
+            input = scanner.nextInt();
+            scanner.nextLine();
+            
+            if(input == -1) {
+                break;
+            }
+            
+            m = sistema.getMaterial(input);
+            if(m == null) {
+                System.err.println("Material não encontrado!");
+                input = -1;
+                continue;
+            }
+            System.out.print("Quantidade do material: ");
+            input = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Detalhes do material:");
+            System.out.println("    Nome:       " + m.getNome() +
+                             "\n    Quantidade: " + input);
+            System.out.print("Informações corretas? (s/n) ");
+            if(scanner.nextLine().trim().toLowerCase().startsWith("s")) {
+                // Registra o material
+                try {
+                    v.insereMaterial(m, input);
+                } catch(MaterialException e) {
+                    System.err.println("Erro ao adicionar material: " + e);
+                    input = -1;
+                }
+            } else {
+                input = -1;
+            }
+        } while(input < 0);
+        
+        // Registra a venda
+        sistema.realizaVenda(c, cl, v);
+        System.out.println("Venda realizada com sucesso.");
+        System.out.println("Extrato de venda:");
+        System.out.println(v);
+    }
+    
+    private static void consultaVenda(Colaborador c) {
+        
+    }
     
     /* ----- MATERIAIS ----- */
     
