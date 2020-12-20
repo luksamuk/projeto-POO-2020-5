@@ -15,11 +15,34 @@ import java.util.List;
  * @version 1.0
  */
 public class Colaborador extends Pessoa {
+
+    /**
+     * Número de instâncias de Colaborador criadas desde o início da execução
+     * da aplicação. Pode não condizer com o número de colaboradores cadastrados
+     * no sistema.
+     */
     protected static int num_instances = 0;
     
+    /**
+     * Login do colaborador.
+     */
     protected String login;
+
+    /**
+     * Senha do colaborador.
+     */
     protected String senha;
     
+    /**
+     * Constrói uma instância de um objeto representando um Colaborador.
+     * @param nome Nome do colaborador.
+     * @param endereco Endereço do colaborador.
+     * @param email E-mail do colaborador.
+     * @param cpf CPF do colaborador.
+     * @param telefone Telefone do colaborador.
+     * @param login Login do colaborador.
+     * @param senha Senha do colaborador.
+     */
     public Colaborador(String nome, String endereco, String email, String cpf,
             String telefone, String login, String senha) {
         super(nome, endereco, email, cpf, telefone);
@@ -28,22 +51,44 @@ public class Colaborador extends Pessoa {
         num_instances++;
     }
 
+    /**
+     * Recupera o login do colaborador.
+     * @return String representando o login do colaborador.
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * Redefine o login do colaborador.
+     * @param login Novo login a ser atribuído ao colaborador.
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Recupera a senha do colaborador.
+     * @return String representando a senha do colaborador.
+     */
     public String getSenha() {
         return senha;
     }
 
+    /**
+     * Redefine a senha do colaborador.
+     * @param senha Nova senha a ser atribuída ao colaborador.
+     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
     
+    /**
+     * Retorna o número de instâncias de Colaborador criadas desde o início da
+     * execução da aplicação. Este número pode não condizer com a quantidade de
+     * colaboradores cadastrados.
+     * @return Número de instâncias de Colaborador criadas.
+     */
     public static int getNumInstances() {
         return num_instances;
     }
@@ -77,6 +122,12 @@ public class Colaborador extends Pessoa {
         return l;
     }
     
+    /**
+     * Formata as informações públicas de um Colaborador para serem impressas
+     * em console.
+     * @return String formatada contendo as informações públicas de um
+     * Colaborador.
+     */
     @Override
     public String toString() {
         return super.toString() + "\nLogin:    " + this.login;

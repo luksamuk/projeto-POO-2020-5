@@ -11,9 +11,13 @@ package lojaconstrucao;
  * @version 1.0
  */
 public class InvalidPessoaException extends Exception {
+
+    /**
+     * Constrói uma instância de um objeto de exceção relacionada ao cadastro de
+     * uma Pessoa.
+     * @param p Pessoa com cadastro problemático.
+     */
     public InvalidPessoaException(Pessoa p) {
         super("Cadastro inválido para Pessoa " + p.getNome());
     }
-    
-    // Exceções já herdam toString de Exception.
 }

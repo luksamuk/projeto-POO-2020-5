@@ -11,9 +11,12 @@ package lojaconstrucao;
  * @version 1.0
  */
 public class InvalidLoginException extends Exception {
+    
+    /**
+     * Constrói uma instância de um objeto de exceção de Login.
+     * @param info Informação extra sobre o processo falho de Login.
+     */
     public InvalidLoginException(String info) {
         super("Impossível realizar login: " + info);
     }
-    
-    // Exceções já herdam toString de Exception.
 }

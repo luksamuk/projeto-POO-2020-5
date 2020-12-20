@@ -18,6 +18,14 @@ public final class Cliente extends Pessoa {
     
     private List<Venda> regCompras;
     
+    /**
+     * Constrói uma instância de um Cliente.
+     * @param nome Nome do cliente.
+     * @param endereco Endereço do cliente.
+     * @param email E-mail do cliente.
+     * @param cpf CPF do cliente.
+     * @param telefone Telefone do cliente.
+     */
     public Cliente(String nome, String endereco, String email, String cpf,
             String telefone) {
         super(nome, endereco, email, cpf, telefone);
@@ -29,15 +37,33 @@ public final class Cliente extends Pessoa {
         
     }
     
+    /**
+     * Imprime as informações do cliente na saída padrão do console.
+     */
     public void imprimirInfo() {
         System.out.println(this);
     }
     
+    /**
+     * Retorna o número de instâncias da classe Cliente criadas desde o início
+     * da execução da aplicação. Este número pode não condizer com a quantidade
+     * de clientes registrada no sistema.
+     * @return Um número maior ou igual a zero representando a quantidade de
+     * clientes.
+     */
     public static int getNumInstances() {
         return num_instances;
     }
     
+    /**
+     * Redefine o número de instâncias da classe Cliente criadas desde o início
+     * da execução da aplicação.
+     * @param num Novo número de instâncias a ser utilizado.
+     */
     public void setNumInstances(int num) {
+        if(num < 0) {
+            return;
+        }
         num_instances = num;
     }
     

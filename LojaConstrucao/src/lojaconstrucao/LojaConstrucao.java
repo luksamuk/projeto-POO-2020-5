@@ -191,7 +191,7 @@ public final class LojaConstrucao {
         
         var m = new Material(nome, quantidade, preco, especificacao,
                 margemLucro, dataFabricacao, fornecedor);
-        sistema.incluirMaterial(m);
+        sistema.incluirMaterial(adm, m);
         System.out.println("Material cadastrado com sucesso:\n" + m);
     }
     
