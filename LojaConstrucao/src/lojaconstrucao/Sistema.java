@@ -272,6 +272,7 @@ public final class Sistema implements Serializable {
         vendas.put(id, v);
         v.setID(id);
         cl.adicionaCompra(v);
+        v.setCliente(cl);
         last_id_venda++;
         return id;
     }

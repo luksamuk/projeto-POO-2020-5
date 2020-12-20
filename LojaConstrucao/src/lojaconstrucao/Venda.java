@@ -23,12 +23,14 @@ public class Venda implements Serializable {
     private float valorTotal;
     private Set<Material> materiais;
     private Map<Material, Integer> quantidades;
+    private Cliente cliente;
     
     /**
      * Constrói uma instância de uma venda na loja.
      */
     public Venda() {
         idVenda = -1;
+        cliente = null;
         data = new Date();
         valorTotal = 0.0f;
         materiais = new HashSet<>();
@@ -81,6 +83,24 @@ public class Venda implements Serializable {
     public Date getData() {
         return data;
     }
+    
+    /**
+     * Recupera o cliente a quem a venda foi feita.
+     * @return Referência ao cliente a quem a venda foi feita, ou `null` se a
+     * venda ainda não foi cadastrada.
+     */
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+    
+    /**
+     * Redefine o cliente a quem a venda foi feita. Evite invocar diretamente
+     * este método.
+     * @param c Referência ao cliente a quem a venda será feita.
+     */
+    public void setCliente(Cliente c) {
+        this.cliente = c;
+    }
 
     /**
      * Recupera o valor total da venda.
@@ -107,8 +127,9 @@ public class Venda implements Serializable {
     public String toString() {
         String buffer = new String();
         buffer += "Venda #" + this.idVenda + "\n";
-        buffer += "Data:        " + this.data + "\n";
-        buffer += "Valor Total: R$" + this.valorTotal + "\n";
+        buffer += "CPF do Cliente: " + this.cliente.getCPF() + "\n";
+        buffer += "Data:           " + this.data + "\n";
+        buffer += "Valor Total:    R$" + this.valorTotal + "\n";
         buffer += "Materiais adquiridos:";
         for(Material m : materiais) {
             buffer += "\n        Nome: " + m.getNome();
