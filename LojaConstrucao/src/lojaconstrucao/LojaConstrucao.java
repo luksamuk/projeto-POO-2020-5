@@ -86,16 +86,16 @@ public final class LojaConstrucao {
                         }
                         break;
                     case 2:
-                        LojaConstrucao.crudVendas(usuario);
+                        LojaConstrucao.submenuVendas(usuario);
                         break;
                     case 3:
-                        LojaConstrucao.crudMateriais(usuario);
+                        LojaConstrucao.submenuMateriais(usuario);
                         break;
                     case 4:
-                        LojaConstrucao.crudClientes(usuario);
+                        LojaConstrucao.submenuClientes(usuario);
                         break;
                     case 5:
-                        LojaConstrucao.crudColaboradores(usuario);
+                        LojaConstrucao.submenuColaboradores(usuario);
                         break;
                     case 6:
                         System.out.println("Número de instâncias criadas por classe");
@@ -119,13 +119,13 @@ public final class LojaConstrucao {
     // Os métodos a seguir gerenciam submenus da aplicação.
     
     /* Submenu de vendas */
-    private static void crudVendas(Colaborador c) {
+    private static void submenuVendas(Colaborador c) {
         // TODO: Imprimir extrato logo após realização da venda!
         System.out.println("Gerência de vendas não implementada!\n");
     }
     
     /* Submenu de materiais */
-    private static void crudMateriais(Colaborador c) {
+    private static void submenuMateriais(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
@@ -207,7 +207,7 @@ public final class LojaConstrucao {
     }
     
     /* Submenu de clientes */
-    private static void crudClientes(Colaborador c) {
+    private static void submenuClientes(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
@@ -279,7 +279,7 @@ public final class LojaConstrucao {
     }
     
     /* Submenu de colaboradores */
-    private static void crudColaboradores(Colaborador c) {
+    private static void submenuColaboradores(Colaborador c) {
         // Cadastro, atualização: Administração.
         // Consulta: Colaborador.
         boolean is_admin = c instanceof Administrador;
