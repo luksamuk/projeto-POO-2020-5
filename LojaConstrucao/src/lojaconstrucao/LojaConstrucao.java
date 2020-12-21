@@ -537,8 +537,8 @@ public final class LojaConstrucao {
         System.out.print("Fornecedor:    ");
         fornecedor = scanner.nextLine().trim();
         
-        var m = new Material(nome, quantidade, preco, especificacao,
-                margemLucro, dataFabricacao, fornecedor);
+        Material m = new Material(nome, quantidade, preco, especificacao,
+                    margemLucro, dataFabricacao, fornecedor);
         sistema.incluirMaterial(adm, m);
         System.out.println("Material cadastrado com sucesso:\n" + m);
     }
@@ -649,8 +649,8 @@ public final class LojaConstrucao {
         telefone = scanner.nextLine().trim();
 
         try {
-            var cl = new Cliente(nome, endereco, email, cpf,
-                    telefone);
+            Cliente cl = new Cliente(nome, endereco, email, cpf,
+                     telefone);
             
             sistema.incluirCliente(adm, cl);
             
@@ -676,7 +676,7 @@ public final class LojaConstrucao {
     private static void alteraCliente(Administrador adm) {
         System.out.println("Insira o CPF para pesquisa.");
         System.out.print("CPF:      ");
-        var cpf = scanner.nextLine().trim();
+        String cpf = scanner.nextLine().trim();
         Cliente c = sistema.getCliente(cpf);
         if(c != null) {
             System.out.println("Insira as novas informações do cliente.");
@@ -718,7 +718,7 @@ public final class LojaConstrucao {
         telefone = scanner.nextLine().trim();
         
         try {
-            var col = new Colaborador(nome, endereco, email, cpf,
+            Colaborador col = new Colaborador(nome, endereco, email, cpf,
                     telefone, login, senha);
             
             sistema.incluirColaborador(adm, col);
@@ -732,7 +732,7 @@ public final class LojaConstrucao {
     
     private static void removeColaborador(Administrador adm) {
         System.out.print("Login:    ");
-        var login = scanner.nextLine().trim();
+        String login = scanner.nextLine().trim();
         if(sistema.removeColaborador(adm, login)) {
             System.out.println("\nRemoção realizada com sucesso.");
         } else {
@@ -743,7 +743,7 @@ public final class LojaConstrucao {
     private static void alteraColaborador(Administrador adm) {
         System.out.println("Insira o login para pesquisa.");
         System.out.print("Login:    ");
-        var login = scanner.nextLine().trim();
+        String login = scanner.nextLine().trim();
         Colaborador c = sistema.getColaborador(login);
         if(c != null) {
             System.out.println("Insira as novas informações do colaborador.");
